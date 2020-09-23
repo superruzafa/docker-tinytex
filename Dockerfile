@@ -1,4 +1,4 @@
-FROM alpine:3.12 AS build
+FROM frolvlad/alpine-glibc AS build
 
 WORKDIR /root
 
@@ -19,18 +19,19 @@ RUN \
 
 
 
-FROM alpine:3.12 AS runtime
+FROM frolvlad/alpine-glibc AS runtime
 
 RUN apk update && \
     apk --no-cache add \
         perl \
         wget \
         cairo-gobject \
-        poppler-glib
+        poppler-glib \
+        xz
 
 WORKDIR /root
 
-RUN wget -qO- "https://yihui.org/gh/tinytex/tools/install-unx.sh" | sh
+RUN wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
 
 COPY --from=build /usr/local/bin/pdf2svg /usr/local/bin
 RUN ln -s /root/bin/* /usr/local/bin
