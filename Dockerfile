@@ -4,6 +4,7 @@ WORKDIR /root
 
 RUN apk update \
     && apk --no-cache add \
+        bash \
         gcc \
         make \
         libc-dev \
