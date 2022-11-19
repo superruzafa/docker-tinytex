@@ -4,7 +4,6 @@ WORKDIR /root
 
 RUN apk update \
     && apk --no-cache add \
-        bash \
         gcc \
         make \
         libc-dev \
@@ -24,6 +23,7 @@ FROM frolvlad/alpine-glibc AS runtime
 
 RUN apk update && \
     apk --no-cache add \
+        bash \
         perl \
         wget \
         cairo-gobject \
