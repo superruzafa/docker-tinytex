@@ -32,7 +32,9 @@ RUN apk update && \
 
 WORKDIR /root
 
-RUN wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+# RUN wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+COPY install-bin-unix.sh .
+RUN sh install-bin-unix.sh
 
 COPY --from=build /usr/local/bin/pdf2svg /usr/local/bin
 RUN ln -s /root/bin/* /usr/local/bin
